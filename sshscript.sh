@@ -1,4 +1,5 @@
 #! /usr/bin/bash
+set -eox pipefail
 
 # set up ssh keygen                                                             
 if [ -n ${HOME}/.ssh ]; then                                                    
