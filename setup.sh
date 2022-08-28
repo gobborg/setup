@@ -69,7 +69,10 @@ ssh-keygen -t ed25519 -C "$githubEmail"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 
-# git clone other dotfiles (this will repeat getting the .gitconfig but that's ok) and symlink them to the appropriate locations
+# check for existing dotfiles, git clone other dotfiles, and symlink them to the appropriate locations
+if [[ -n ${HOME}/.bash* ]]; then rm .bash* fi
+if [ -n ${HOME}/.vimrc ]; then rm .vimrc fi
+if [[ -n ${HOME}/.git* ]]; then rm .git* fi
 mkdir ${HOME}/dotfiles
 git clone https://github.com/gobborg/dotfiles.git ${HOME}/dotfiles # can't use ssh until the public key is copied into the GH account in the git config
 ln -sv ${HOME}/dotfiles/* ${HOME}/
